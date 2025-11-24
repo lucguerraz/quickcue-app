@@ -1,1 +1,47 @@
 @import 'tailwindcss';
+
+@theme {
+  /* Colors */
+  --neutral-50: #fcfcfc;
+  --neutral-100: #fafafa;
+  --neutral-200: #f2f2f2;
+  --neutral-300: #e3e3e3;
+  --neutral-400: #d9d9d9;
+  --neutral-500: #c9c9c9;
+  --neutral-600: #a8a8a8;
+  --neutral-700: #666666;
+  --neutral-800: #232323;
+  --neutral-900: #131313;
+  --neutral-950: #070707;
+  --primary-50: #fef7ff;
+  --primary-100: #fdedff;
+  --primary-200: #fad4ff;
+  --primary-300: #f5b8ff;
+  --primary-400: #eb85ff;
+  --primary-500: #dc50ff;
+  --primary-600: #bf40e6;
+  --primary-700: #932cbf;
+  --primary-800: #6c1d99;
+  --primary-900: #4a1073;
+  --primary-950: #29074a;
+  --other-red-500: #cb0000;
+  --other-red-700: #ad0000;
+
+  /* Tokens */
+  --color-surface-brand: var(--primary-300);
+  --color-surface-brand-contrast: var(--primary-500);
+  --color-surface-danger: var(--other-red-500);
+  --color-surface-danger-contrast: var(--other-red-700);
+  --color-surface-primary: var(--neutral-50);
+  --color-surface-primary-inverted: var(--neutral-950);
+  --color-surface-secondary: var(--neutral-200);
+  --color-surface-secondary-contrast: var(--neutral-300);
+  --color-text-brand: var(--neutral-950);
+  --color-text-brand-contrast: var(--neutral-50);
+  --color-text-danger: var(--neutral-50);
+  --color-text-danger-contrast: var(--neutral-50);
+  --color-text-primary: var(--neutral-950);
+  --color-text-primary-inverted: var(--primary-50);
+  --color-text-secondary: var(--neutral-900);
+  --color-text-secondary-contrast: var(--neutral-700);
+}
