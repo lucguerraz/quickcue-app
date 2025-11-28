@@ -7,6 +7,8 @@ import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
 import type { QueryClient } from '@tanstack/react-query'
 import type { AuthState } from '@/context/Auth'
 
+import { LoginModal } from '@/components/Login/LoginModal'
+
 interface MyRouterContext {
   queryClient: QueryClient
   auth: AuthState
@@ -16,6 +18,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: () => (
     <>
       <Outlet />
+      <LoginModal />
       <TanStackDevtools
         config={{
           position: 'bottom-right',
