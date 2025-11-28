@@ -9,7 +9,7 @@ export interface InputProps {
   value?: string
   disabled?: boolean
   error?: string
-  onChange?: () => void
+  onChange?: (e: React.ChangeEvent) => void
   className?: string
 }
 
@@ -17,7 +17,7 @@ export const Input: React.FC<InputProps> = ({
   label,
   name,
   type = 'text',
-  value = '',
+  value = undefined,
   disabled = false,
   error = '',
   onChange,

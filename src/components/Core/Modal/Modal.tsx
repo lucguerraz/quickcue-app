@@ -6,12 +6,20 @@ import { Button } from '@/components/Core/Button'
 export interface ModalProps {
   title: string
   children: React.ReactNode
-  onSave: (e: React.FormEvent, close: () => void) => void
+  onSave: (e: React.FormEvent<HTMLFormElement>, close: () => void) => void
   closePath?: string
+  showButtons?: boolean
   className?: string
 }
 
-export const Modal: React.FC<ModalProps> = ({ title, children, onSave, closePath = '..', className = '' }) => {
+export const Modal: React.FC<ModalProps> = ({
+  title,
+  children,
+  onSave,
+  closePath = '..',
+  showButtons = true,
+  className = '',
+}) => {
   const navigate = useNavigate()
   const [state, setState] = useState('open')
 
@@ -49,6 +57,7 @@ export const Modal: React.FC<ModalProps> = ({ title, children, onSave, closePath
         >
           <header className="sticky flex items-center justify-between">
             <h2 className="text-2xl font-medium">{title}</h2>
+            {showButtons && (
             <div className="flex gap-3">
               <Button
                 variant="secondary"
@@ -61,6 +70,7 @@ export const Modal: React.FC<ModalProps> = ({ title, children, onSave, closePath
               </Button>
               <Button type="submit">Save</Button>
             </div>
+            )}
           </header>
           <main className="order-last flex flex-col gap-10 *:relative *:after:absolute *:after:-bottom-4 *:after:h-px *:after:w-full *:after:bg-surface-secondary-contrast">
             {children}
