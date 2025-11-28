@@ -6,7 +6,7 @@ import { Button } from '@/components/Core/Button'
 export interface ModalProps {
   title: string
   children: React.ReactNode
-  onSave: (e: React.FormEvent, close: () => void) => void
+  onSave: (e: React.FormEvent<HTMLFormElement>, close: () => void) => void
   closePath?: string
   className?: string
 }
