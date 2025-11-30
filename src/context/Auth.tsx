@@ -15,7 +15,7 @@ export interface User {
 export interface AuthState {
   isAuthenticated: () => boolean
   user: User | null
-  logout: () => void
+  logout: () => Promise<boolean>
   loginEmail: (email_address: string) => Promise<CreateSessionResponse>
   loginCode: (sessionUUID: string, code: string) => Promise<UpdateSessionResponse>
 }
@@ -79,7 +79,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return api
   }
 
-  const logout = async () => {
+  const logout = async (): Promise<boolean> => {
     const sessionUUID = localStorage.getItem('session-uuid')
     if (sessionUUID) {
       const api = await deleteSession(sessionUUID)
@@ -88,10 +88,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         localStorage.removeItem('session-uuid')
         setUser(null)
         setIsAuthenticated(false)
+        return true
       }
+      return false
     } else {
       setUser(null)
       setIsAuthenticated(false)
+      return false
     }
   }
 
