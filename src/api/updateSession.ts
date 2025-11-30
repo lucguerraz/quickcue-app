@@ -5,6 +5,7 @@ export interface UpdateSessionSuccess {
     uuid: string
     name: string | null
     email_address: string
+    picture: string | null
   }
 }
 
