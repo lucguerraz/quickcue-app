@@ -11,6 +11,7 @@ import '@/assets/styles/main.css'
 import reportWebVitals from './reportWebVitals.ts'
 
 import { AuthProvider, useAuth } from '@/context/Auth'
+import { AppProvider } from '@/context/App'
 
 // Create a new router instance
 
@@ -47,9 +48,11 @@ if (rootElement && !rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <TanStackQueryProvider.Provider {...TanStackQueryProviderContext}>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
+        <AppProvider>
+          <AuthProvider>
+            <App />
+          </AuthProvider>
+        </AppProvider>
       </TanStackQueryProvider.Provider>
     </StrictMode>,
   )
