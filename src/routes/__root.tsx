@@ -7,6 +7,7 @@ import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
 import type { QueryClient } from '@tanstack/react-query'
 import type { AuthState } from '@/context/Auth'
 
+import { Header } from '@/components/App/Header'
 import { LoginModal } from '@/components/Login/LoginModal'
 
 interface MyRouterContext {
@@ -17,8 +18,11 @@ interface MyRouterContext {
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: () => (
     <>
-      <Outlet />
-      <LoginModal />
+      <Header />
+      <main className="rounded-t-xl bg-surface-primary">
+        <Outlet />
+        <LoginModal />
+      </main>
       <TanStackDevtools
         config={{
           position: 'bottom-right',
