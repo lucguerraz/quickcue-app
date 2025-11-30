@@ -83,3 +83,28 @@ export const loggedInOnWhite: Story = {
     backgrounds: { value: 'light' },
   },
 }
+
+export const loggedInWithoutPicture: Story = {
+  args: {
+    name: 'Marcus Laine',
+    email_address: 'marcus.laine@example.com',
+  } as any,
+  decorators: [
+    withReactContext({
+      context: AuthContext,
+      contextValue: ({ args }: { args: UserType }) => {
+        return {
+          isAuthenticated: () => true,
+          logout: async () => true,
+          user: {
+            name: args.name,
+            email_address: args.email_address,
+          },
+        }
+      },
+    }),
+  ],
+  globals: {
+    backgrounds: { value: 'dark' },
+  },
+}

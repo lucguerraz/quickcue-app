@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react'
 
 import { Link, useNavigate } from '@tanstack/react-router'
+import { createAvatar } from '@dicebear/core'
+import { notionistsNeutral } from '@dicebear/collection'
 import { useAuth } from '@/context/Auth'
 import { User as UserIcon } from 'react-feather'
 
@@ -74,7 +76,20 @@ export const User: React.FC<UserProps> = ({ className = '' }) => {
         onClick={() => setIsNavOpen(!isNavOpen)}
         className="h-12 w-12 rounded-md focus-visible:ring-1 focus-visible:ring-text-primary-inverted focus-visible:ring-offset-2 focus-visible:ring-offset-surface-primary-inverted focus-visible:outline-none"
       >
-        <img src={user?.picture ? user.picture : ''} alt="" className="h-full w-full rounded-md object-cover" />
+        {user !== null && user.picture ? (
+          <img src={user.picture} alt="" className="h-full w-full rounded-md object-cover" />
+        ) : (
+          <div
+            className="pointer-events-none h-full w-full overflow-hidden rounded-md bg-primary-300 object-cover"
+            dangerouslySetInnerHTML={{
+              __html: createAvatar(notionistsNeutral, {
+                seed: user?.email_address,
+                flip: true,
+                backgroundColor: ['transparent'],
+              }).toString(),
+            }}
+          ></div>
+        )}
       </button>
       <nav
         className={`${isNavOpen ? 'block' : 'hidden'} absolute top-[calc(100%+.5rem)] right-0 transform-gpu rounded-md bg-surface-primary text-base drop-shadow-[0_0_6px] drop-shadow-surface-primary-inverted/20`}
