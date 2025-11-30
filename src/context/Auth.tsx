@@ -20,7 +20,7 @@ export interface AuthState {
   loginCode: (sessionUUID: string, code: string) => Promise<UpdateSessionResponse>
 }
 
-const AuthContext = createContext<AuthState | undefined>(undefined)
+export const AuthContext = createContext<AuthState | undefined>(undefined)
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
