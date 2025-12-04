@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { VideoTeaser } from './VideoTeaser'
 
 const meta = {
-  title: 'Dashboard/VideoTeaser',
+  title: 'Dashboard/VideoTeaser/VideoTeaser',
   component: VideoTeaser,
   parameters: {
     layout: 'centered',
