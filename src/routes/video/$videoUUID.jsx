@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 
 import { useApp } from '@/context/App'
@@ -12,7 +13,9 @@ function VideoPage() {
     header: { setShowDashboardButton },
   } = useApp()
 
-  setShowDashboardButton(true)
+  useEffect(() => {
+    setShowDashboardButton(true)
+  })
 
   return <h1 className="text-3xl font-medium">Video {videoUUID}</h1>
 }
