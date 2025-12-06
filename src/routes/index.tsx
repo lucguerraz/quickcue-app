@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { createFileRoute, redirect } from '@tanstack/react-router'
 
 import { useAuth } from '@/context/Auth'
@@ -35,7 +35,9 @@ function App() {
 
   const [uploadingVideo, setUploadingVideo] = useState<uploadPreview | null>(null)
 
-  setShowDashboardButton(false)
+  useEffect(() => {
+    setShowDashboardButton(false)
+  })
 
   if (!auth.isAuthenticated()) return <p>Please Login</p>
 
