@@ -1,24 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { VideoTeaserSkeleton } from './VideoTeaserSkeleton'
+import { VideoUpload } from './VideoUpload'
 
 const meta = {
-  title: 'Dashboard/VideoTeaser/VideoTeaserSkeleton',
-  component: VideoTeaserSkeleton,
+  title: 'Dashboard/VideoUpload',
+  component: VideoUpload,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
   args: {},
-} satisfies Meta<typeof VideoTeaserSkeleton>
+} satisfies Meta<typeof VideoUpload>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {},
-  globals: {
-    minWidth: '600px',
-    maxWidth: '600px',
-  },
 }

@@ -1,7 +1,11 @@
-import { createFileRoute, redirect, useNavigate, Link } from '@tanstack/react-router'
+import { useState } from 'react'
+import { createFileRoute, redirect } from '@tanstack/react-router'
 
 import { useAuth } from '@/context/Auth'
 import { useApp } from '@/context/App'
+import { VideoCollection } from '@/components/Dashboard/VideoCollection'
+import { VideoUpload } from '@/components/Dashboard/VideoUpload'
+import type { uploadPreview } from '@/api/createVideo'
 
 export const Route = createFileRoute('/')({
   beforeLoad: ({ context, search }) => {
@@ -25,40 +29,23 @@ export const Route = createFileRoute('/')({
 
 function App() {
   const auth = useAuth()
-  const navigate = useNavigate()
   const {
     header: { setShowDashboardButton },
   } = useApp()
+
+  const [uploadingVideo, setUploadingVideo] = useState<uploadPreview | null>(null)
 
   setShowDashboardButton(false)
 
   if (!auth.isAuthenticated()) return <p>Please Login</p>
 
   return (
-    <>
-      <h1 className="text-center">
-        Welcome back {auth.user?.name} ({auth.user?.email_address})!
-      </h1>
-      <Link to="/video/$videoUUID" params={{ videoUUID: 'uuid' }}>
-        video
-      </Link>
-      <button
-        onClick={() => {
-          auth.logout()
-          navigate({
-            to: '.',
-            search: {
-              modal: 'login',
-              redirect: location.href,
-            },
-            mask: {
-              to: '/login',
-            },
-          })
-        }}
-      >
-        Logout
-      </button>
-    </>
+    <section className="@container">
+      <div className="mx-6 flex items-center justify-between pt-6">
+        <h1 className="text-4xl leading-none font-medium text-text-primary">Videos</h1>
+        <VideoUpload uploadingVideo={uploadingVideo} setUploadingVideo={setUploadingVideo} />
+      </div>
+      <VideoCollection uploadingVideo={uploadingVideo} setUploadingVideo={setUploadingVideo} />
+    </section>
   )
 }

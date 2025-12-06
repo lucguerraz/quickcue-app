@@ -41,6 +41,8 @@
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^5.0.4",
     "jsdom": "^27.0.0",
+    "msw": "^2.12.4",
+    "msw-storybook-addon": "^2.0.6",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.7.1",
     "storybook-react-context": "^0.9.0",
@@ -49,5 +51,10 @@
     "vite": "^7.1.7",
     "vitest": "^3.0.5",
     "web-vitals": "^5.1.0"
+  },
+  "msw": {
+    "workerDirectory": [
+      ".storybook/public"
+    ]
   }
 }

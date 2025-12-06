@@ -4,18 +4,18 @@ import { Link } from '@tanstack/react-router'
 
 export interface VideoTeaserProps {
   uuid: string
-  thumbnail: string
+  poster: string
   title: string
-  commentsNumber: number
+  commentCount: number
   lastModified: string
   className?: string
 }
 
 export const VideoTeaser: React.FC<VideoTeaserProps> = ({
   uuid,
-  thumbnail,
+  poster,
   title,
-  commentsNumber,
+  commentCount,
   lastModified,
   className = '',
 }) => {
@@ -76,7 +76,7 @@ export const VideoTeaser: React.FC<VideoTeaserProps> = ({
         className="flex flex-col gap-2 rounded-lg outline-0"
         tabIndex={0}
       >
-        <img src={thumbnail} alt="" className="aspect-video rounded-lg object-cover" />
+        <img src={poster} alt="" className="aspect-video rounded-lg object-cover" />
         <h2
           title={title}
           className="overflow-hidden mask-r-from-black mask-r-from-60% mask-r-to-transparent mask-r-to-95% text-xl leading-[1.1] whitespace-nowrap text-text-primary"
@@ -84,7 +84,7 @@ export const VideoTeaser: React.FC<VideoTeaserProps> = ({
           {title}
         </h2>
         <div className="flex flex-wrap items-center gap-2 text-sm leading-[1.1] text-text-secondary-contrast after:h-0.5 after:w-0.5 after:rounded-full after:bg-text-secondary-contrast">
-          <p>{commentsNumber + ' ' + (commentsNumber == 1 ? 'Comment' : 'Comments')}</p>
+          <p>{commentCount + ' ' + (commentCount == 1 ? 'Comment' : 'Comments')}</p>
           <p className="order-last">Last modified {timeAgo(lastModified)}</p>
         </div>
       </Link>
