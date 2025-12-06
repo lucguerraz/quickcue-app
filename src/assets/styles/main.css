@@ -25,8 +25,10 @@
   --color-primary-800: #6c1d99;
   --color-primary-900: #4a1073;
   --color-primary-950: #29074a;
+  --color-other-green-500: #35966a;
   --color-other-red-500: #cb0000;
   --color-other-red-700: #ad0000;
+  --color-other-yellow-500: #d37709;
 
   /* Tokens */
   --color-surface-brand: var(--color-primary-300);
@@ -37,6 +39,8 @@
   --color-surface-primary-inverted: var(--color-neutral-950);
   --color-surface-secondary: var(--color-neutral-200);
   --color-surface-secondary-contrast: var(--color-neutral-300);
+  --color-surface-success: var(--color-other-green-500);
+  --color-surface-warning: var(--color-other-yellow-500);
   --color-text-brand: var(--color-neutral-950);
   --color-text-brand-contrast: var(--color-neutral-50);
   --color-text-danger: var(--color-neutral-50);
@@ -53,4 +57,8 @@
 
 ::view-transition-old(app-modal-fade-out) {
   @apply animate-out duration-300 fade-out-0 fill-mode-both;
+}
+
+::view-transition-old(app-toast-slide-out) {
+  @apply animate-out duration-300 fade-out-0 fill-mode-both slide-out-to-top;
 }
