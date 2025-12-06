@@ -4,13 +4,20 @@ import { useQuery } from '@tanstack/react-query'
 import { getVideos, type GetVideosSuccess, type Video } from '@/api/getVideos'
 import { AlertCircle } from 'react-feather'
 import { Button } from '@/components/Core/Button'
-import { VideoTeaser, VideoTeaserSkeleton } from '@/components/Dashboard/VideoTeaser'
+import { VideoTeaser, VideoTeaserSkeleton, VideoTeaserUploading } from '@/components/Dashboard/VideoTeaser'
+import { type uploadPreview } from '@/api/createVideo'
 
 export interface VideoCollectionProps {
+  uploadingVideo: uploadPreview | null
+  setUploadingVideo: (video: uploadPreview | null) => void
   className?: string
 }
 
-export const VideoCollection: React.FC<VideoCollectionProps> = ({ className = '' }) => {
+export const VideoCollection: React.FC<VideoCollectionProps> = ({
+  uploadingVideo,
+  setUploadingVideo,
+  className = '',
+}) => {
   const { isPending, data, isError, error, refetch } = useQuery({
     queryKey: ['videos'],
     queryFn: async () => {
@@ -41,8 +48,25 @@ export const VideoCollection: React.FC<VideoCollectionProps> = ({ className = ''
     )
   }
 
+  if (uploadingVideo && uploadingVideo.status === 'done') {
+    ;(async () => {
+      await refetch()
+      setUploadingVideo(null)
+    })()
+  }
+
   return (
     <div className={`m-3 grid grid-cols-[repeat(auto-fill,minmax(min(400px,calc(100vw-3rem)),1fr))] ${className}`}>
+      {uploadingVideo && (
+        <VideoTeaserUploading
+          key={uploadingVideo.uuid}
+          uuid={uploadingVideo.uuid}
+          title={uploadingVideo.name}
+          poster={uploadingVideo.poster}
+          status={uploadingVideo.status}
+          progress={uploadingVideo.progress}
+        />
+      )}
       {isPending
         ? [...Array(8).keys()].map((key) => <VideoTeaserSkeleton key={key} />)
         : (data as Video[]).map((video) => (

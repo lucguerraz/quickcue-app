@@ -1,8 +1,11 @@
+import { useState } from 'react'
 import { createFileRoute, redirect } from '@tanstack/react-router'
 
 import { useAuth } from '@/context/Auth'
 import { useApp } from '@/context/App'
 import { VideoCollection } from '@/components/Dashboard/VideoCollection'
+import { VideoUpload } from '@/components/Dashboard/VideoUpload'
+import type { uploadPreview } from '@/api/createVideo'
 
 export const Route = createFileRoute('/')({
   beforeLoad: ({ context, search }) => {
@@ -30,16 +33,19 @@ function App() {
     header: { setShowDashboardButton },
   } = useApp()
 
+  const [uploadingVideo, setUploadingVideo] = useState<uploadPreview | null>(null)
+
   setShowDashboardButton(false)
 
   if (!auth.isAuthenticated()) return <p>Please Login</p>
 
   return (
-    <section>
-      <div className="mx-6 pt-6">
+    <section className="@container">
+      <div className="mx-6 flex items-center justify-between pt-6">
         <h1 className="text-4xl leading-none font-medium text-text-primary">Videos</h1>
+        <VideoUpload uploadingVideo={uploadingVideo} setUploadingVideo={setUploadingVideo} />
       </div>
-      <VideoCollection />
+      <VideoCollection uploadingVideo={uploadingVideo} setUploadingVideo={setUploadingVideo} />
     </section>
   )
 }
