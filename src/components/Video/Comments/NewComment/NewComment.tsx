@@ -121,7 +121,7 @@ export const NewComment: React.FC<NewCommentProps> = ({
               </div>
             )}
             {startTimestamp !== false && endTimestamp === false && (
-              <div className="group flex">
+              <div className="group flex focus-within:[&+div>span]:bg-transparent">
                 <span className="w-[0.5px] bg-text-secondary-contrast group-focus-within:bg-transparent"></span>
                 <button
                   type="button"
