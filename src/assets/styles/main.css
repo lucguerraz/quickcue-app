@@ -62,3 +62,22 @@
 ::view-transition-old(app-toast-slide-out) {
   @apply animate-out duration-300 fade-out-0 fill-mode-both slide-out-to-top;
 }
+
+@keyframes flash {
+  0% {
+    background-color: var(--color-surface-secondary);
+  }
+  30% {
+    background-color: var(--color-surface-secondary-contrast);
+  }
+  50% {
+    background-color: var(--color-surface-secondary-contrast);
+  }
+  100% {
+    background-color: var(--color-surface-secondary);
+  }
+}
+
+.flash {
+  animation: flash 1.2s ease-out;
+}

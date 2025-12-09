@@ -17,6 +17,7 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
+    uuid: '4565f9d3-4cba-49b5-ac51-e7335535b1a5',
     useruuid: '96247793-e9dc-47f1-a635-dc50c378ed21',
     userpic: 'https://images.unsplash.com/photo-1650091903034-5f3bb37c35d2?q=80&w=200&auto=format&fit=crop',
     username: 'Barbara Flint',
@@ -31,6 +32,7 @@ export const Default: Story = {
 
 export const NoUserPicture: Story = {
   args: {
+    uuid: '4565f9d3-4cba-49b5-ac51-e7335535b1a5',
     useruuid: '96247793-e9dc-47f1-a635-dc50c378ed21',
     userpic: null,
     username: 'Barbara Flint',

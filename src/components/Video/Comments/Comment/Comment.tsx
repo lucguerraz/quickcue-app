@@ -5,6 +5,7 @@ import { notionistsNeutral } from '@dicebear/collection'
 
 export interface CommentProps {
   children: React.ReactNode
+  uuid: string
   useruuid: string
   userpic: string | null
   username: string
@@ -14,6 +15,7 @@ export interface CommentProps {
 
 export const Comment: React.FC<CommentProps> = ({
   children,
+  uuid,
   useruuid,
   userpic,
   username,
@@ -68,7 +70,7 @@ export const Comment: React.FC<CommentProps> = ({
   }
 
   return (
-    <article className={`flex flex-col gap-3 rounded-xl bg-surface-secondary p-4 ${className}`}>
+    <article id={`comment_${uuid}`} className={`flex flex-col gap-3 rounded-xl bg-surface-secondary p-4 ${className}`}>
       <div className="flex flex-wrap items-center gap-2 text-sm after:h-0.5 after:w-0.5 after:rounded-full after:bg-text-secondary-contrast">
         {userpic !== null ? (
           <img src={userpic} alt={`Profile Picture of ${username}`} className="h-8 w-8 rounded-md object-cover" />

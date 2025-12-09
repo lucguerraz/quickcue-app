@@ -2,10 +2,13 @@ import React, { useState, useRef, useCallback, useEffect } from 'react'
 
 import * as dashjs from 'dashjs'
 import { ProgressBar } from '@/components/Video/VideoPlayer/ProgressBar'
+import { type Comment } from '@/api/getComments'
+import { CommentsBar } from '@/components/Video/VideoPlayer/CommentsBar'
 
 export interface VideoPlayerProps {
   videoUrl: string
   eventTarget: EventTarget
+  comments: Comment[]
   setVideoLength: (value: number) => void
   setVideoTimecode: (value: number) => void
   className?: string
@@ -14,6 +17,7 @@ export interface VideoPlayerProps {
 export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   videoUrl,
   eventTarget,
+  comments,
   setVideoLength,
   setVideoTimecode,
   className = '',
@@ -108,6 +112,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
         seekTo={seekTo}
         className="absolute top-0"
       />
+      <CommentsBar timecode={timecode} duration={duration} comments={comments} className="" />
     </figure>
   )
 }
