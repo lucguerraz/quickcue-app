@@ -1,10 +1,11 @@
-import React, { useState, useRef, useCallback } from 'react'
+import React, { useState, useRef, useCallback, useEffect } from 'react'
 
 import * as dashjs from 'dashjs'
 import { ProgressBar } from '@/components/Video/VideoPlayer/ProgressBar'
 
 export interface VideoPlayerProps {
   videoUrl: string
+  eventTarget: EventTarget
   setVideoLength: (value: number) => void
   setVideoTimecode: (value: number) => void
   className?: string
@@ -12,6 +13,7 @@ export interface VideoPlayerProps {
 
 export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   videoUrl,
+  eventTarget,
   setVideoLength,
   setVideoTimecode,
   className = '',
@@ -79,6 +81,20 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     if (!playerRef.current) return
     playerRef.current.seekToPresentationTime(timecode)
   }
+
+  const handlePauseEvent = () => {
+    if (!playerRef.current) return
+
+    playerRef.current.pause()
+  }
+
+  useEffect(() => {
+    eventTarget.addEventListener('pause', handlePauseEvent)
+
+    return () => {
+      eventTarget.removeEventListener('pause', handlePauseEvent)
+    }
+  })
 
   return (
     <figure className={`relative aspect-video rounded-lg bg-surface-primary-inverted ${className}`}>

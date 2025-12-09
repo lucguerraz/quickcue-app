@@ -11,6 +11,7 @@ const meta = {
   },
   tags: ['autodocs'],
   args: {
+    eventTarget: new EventTarget(),
     setVideoLength: fn(),
     setVideoTimecode: fn(),
   },
