@@ -101,7 +101,13 @@ export const User: React.FC<UserProps> = ({ className = '' }) => {
           </li>
           <li className="p-1 not-last:border-b not-last:border-b-surface-secondary-contrast">
             <Link
-              to="/"
+              to="."
+              search={{
+                modal: 'account-settings',
+              }}
+              mask={{
+                to: '/account-settings',
+              }}
               tabIndex={0}
               className="block rounded-md p-3 whitespace-nowrap outline-0 hover:bg-surface-secondary focus-visible:bg-surface-secondary focus-visible:ring-1 focus-visible:ring-text-primary"
             >

@@ -7,6 +7,7 @@ export interface InputProps {
   name: string
   type?: 'text' | 'email' | 'number'
   value?: string
+  defaultValue?: string
   disabled?: boolean
   error?: string
   onChange?: (e: React.ChangeEvent) => void
@@ -18,6 +19,7 @@ export const Input: React.FC<InputProps> = ({
   name,
   type = 'text',
   value = undefined,
+  defaultValue = undefined,
   disabled = false,
   error = '',
   onChange,
@@ -31,6 +33,7 @@ export const Input: React.FC<InputProps> = ({
         name={name}
         onChange={onChange}
         value={value}
+        defaultValue={defaultValue}
         disabled={disabled}
         className={`w-full rounded-md px-3 py-1.5 outline-0 focus:ring-1 focus-visible:ring-text-primary/50 ${error ? 'bg-surface-danger/10' : 'bg-surface-secondary focus:bg-surface-secondary-contrast'}`}
       />

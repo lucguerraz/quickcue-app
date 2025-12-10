@@ -9,6 +9,7 @@ import type { AuthState } from '@/context/Auth'
 
 import { Header } from '@/components/App/Header'
 import { LoginModal } from '@/components/Login/LoginModal'
+import { AccountSettingsModal } from '@/components/AccountSettings/AccountSettingsModal'
 import { ToastStack } from '@/components/App/ToastStack'
 
 interface MyRouterContext {
@@ -23,6 +24,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       <main className="rounded-t-xl bg-surface-primary">
         <Outlet />
         <LoginModal />
+        <AccountSettingsModal />
         <ToastStack />
       </main>
       <TanStackDevtools
