@@ -1,11 +1,12 @@
 import { useEffect, useState, useRef } from 'react'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Outlet } from '@tanstack/react-router'
 
 import { useAuth } from '@/context/Auth'
 import { useApp } from '@/context/App'
 import { useQuery } from '@tanstack/react-query'
 import { AlertCircle } from 'react-feather'
 import { Button } from '@/components/Core/Button'
+import { LinkButton } from '@/components/Core/LinkButton'
 import { VideoPlayer } from '@/components/Video/VideoPlayer'
 import { CommentSection } from '@/components/Video/Comments/CommentSection'
 import { getVideo, type GetVideoSuccess } from '@/api/getVideo'
@@ -115,37 +116,40 @@ function VideoPage() {
   }
 
   return (
-    <section>
-      <div className="mx-6 flex items-center justify-between pt-6">
-        <h1 className="text-4xl leading-none font-medium text-text-primary">{videoData.name}</h1>
-        {isAuthenticated() && user?.uuid === videoData.user.uuid ? (
-          <div className="flex gap-2">
-            <Button variant="secondary" icon="edit">
-              Edit
-            </Button>
-            <Button icon="share">Share</Button>
+    <>
+      <section>
+        <div className="mx-6 flex items-center justify-between pt-6">
+          <h1 className="text-4xl leading-none font-medium text-text-primary">{videoData.name}</h1>
+          {isAuthenticated() && user?.uuid === videoData.user.uuid ? (
+            <div className="flex gap-2">
+              <LinkButton to="/video/$videoUUID/edit" params={{ videoUUID }} variant="secondary" icon="edit">
+                Edit
+              </LinkButton>
+              <Button icon="share">Share</Button>
+            </div>
+          ) : null}
+        </div>
+        <div className="m-6 grid grid-cols-[3fr_1fr] gap-3">
+          <div>
+            <VideoPlayer
+              videoUrl={videoData.video_url}
+              eventTarget={videoEventTarget.current}
+              comments={commentsData}
+              setVideoLength={setVideoLength}
+              setVideoTimecode={setVideoTimecode}
+            />
           </div>
-        ) : null}
-      </div>
-      <div className="m-6 grid grid-cols-[3fr_1fr] gap-3">
-        <div>
-          <VideoPlayer
-            videoUrl={videoData.video_url}
-            eventTarget={videoEventTarget.current}
+          <CommentSection
+            videoUUID={videoUUID}
+            videoTimecode={videoTimecode}
+            videoEventTarget={videoEventTarget.current}
+            videoLength={videoLength}
             comments={commentsData}
-            setVideoLength={setVideoLength}
-            setVideoTimecode={setVideoTimecode}
+            reload={commentsRefetch}
           />
         </div>
-        <CommentSection
-          videoUUID={videoUUID}
-          videoTimecode={videoTimecode}
-          videoEventTarget={videoEventTarget.current}
-          videoLength={videoLength}
-          comments={commentsData}
-          reload={commentsRefetch}
-        />
-      </div>
-    </section>
+      </section>
+      <Outlet />
+    </>
   )
 }
