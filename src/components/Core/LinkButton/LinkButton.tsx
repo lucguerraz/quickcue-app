@@ -11,6 +11,7 @@ export interface LinkButtonProps {
   to: string
   search?: any
   mask?: any
+  params?: any
   disabled?: boolean
   className?: string
   icon?: 'new' | 'edit' | 'share' | 'trash' | 'back' | 'none'
@@ -23,6 +24,7 @@ export const LinkButton: React.FC<LinkButtonProps> = ({
   to,
   search,
   mask,
+  params,
   disabled = false,
   className = '',
   icon = 'none',
@@ -58,6 +60,7 @@ export const LinkButton: React.FC<LinkButtonProps> = ({
       to={to}
       search={search}
       mask={mask}
+      params={params}
       tabIndex={0}
       disabled={disabled}
       className={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
