@@ -10,6 +10,9 @@ export interface ModalProps {
   onClose?: () => void
   closePath?: string
   showButtons?: boolean
+  showSubmitButton?: boolean
+  showCloseButton?: boolean
+  closeButtonText?: string
   className?: string
 }
 
@@ -20,6 +23,9 @@ export const Modal: React.FC<ModalProps> = ({
   onClose,
   closePath = '..',
   showButtons = true,
+  showSubmitButton = true,
+  showCloseButton = true,
+  closeButtonText = 'Cancel',
   className = '',
 }) => {
   const navigate = useNavigate()
@@ -61,17 +67,19 @@ export const Modal: React.FC<ModalProps> = ({
             <h2 className="text-2xl font-medium">{title}</h2>
             {showButtons && (
               <div className="flex gap-3">
-                <Button
-                  variant="secondary"
-                  onClick={() => {
-                    if (onClose) onClose()
-                    setState('closed')
-                    navigate({ to: closePath, viewTransition: true })
-                  }}
-                >
-                  Cancel
-                </Button>
-                <Button type="submit">Save</Button>
+                {showCloseButton && (
+                  <Button
+                    variant="secondary"
+                    onClick={() => {
+                      if (onClose) onClose()
+                      setState('closed')
+                      navigate({ to: closePath, viewTransition: true })
+                    }}
+                  >
+                    {closeButtonText}
+                  </Button>
+                )}
+                {showSubmitButton && <Button type="submit">Save</Button>}
               </div>
             )}
           </header>

@@ -13,6 +13,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as AccountSettingsRouteImport } from './routes/account-settings'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as VideoVideoUUIDRouteImport } from './routes/video/$videoUUID'
+import { Route as VideoVideoUUIDShareRouteImport } from './routes/video/$videoUUID/share'
 import { Route as VideoVideoUUIDEditRouteImport } from './routes/video/$videoUUID/edit'
 
 const LoginRoute = LoginRouteImport.update({
@@ -35,6 +36,11 @@ const VideoVideoUUIDRoute = VideoVideoUUIDRouteImport.update({
   path: '/video/$videoUUID',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VideoVideoUUIDShareRoute = VideoVideoUUIDShareRouteImport.update({
+  id: '/share',
+  path: '/share',
+  getParentRoute: () => VideoVideoUUIDRoute,
+} as any)
 const VideoVideoUUIDEditRoute = VideoVideoUUIDEditRouteImport.update({
   id: '/edit',
   path: '/edit',
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/video/$videoUUID': typeof VideoVideoUUIDRouteWithChildren
   '/video/$videoUUID/edit': typeof VideoVideoUUIDEditRoute
+  '/video/$videoUUID/share': typeof VideoVideoUUIDShareRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/video/$videoUUID': typeof VideoVideoUUIDRouteWithChildren
   '/video/$videoUUID/edit': typeof VideoVideoUUIDEditRoute
+  '/video/$videoUUID/share': typeof VideoVideoUUIDShareRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,6 +70,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/video/$videoUUID': typeof VideoVideoUUIDRouteWithChildren
   '/video/$videoUUID/edit': typeof VideoVideoUUIDEditRoute
+  '/video/$videoUUID/share': typeof VideoVideoUUIDShareRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -71,6 +80,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/video/$videoUUID'
     | '/video/$videoUUID/edit'
+    | '/video/$videoUUID/share'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -78,6 +88,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/video/$videoUUID'
     | '/video/$videoUUID/edit'
+    | '/video/$videoUUID/share'
   id:
     | '__root__'
     | '/'
@@ -85,6 +96,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/video/$videoUUID'
     | '/video/$videoUUID/edit'
+    | '/video/$videoUUID/share'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -124,6 +136,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VideoVideoUUIDRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/video/$videoUUID/share': {
+      id: '/video/$videoUUID/share'
+      path: '/share'
+      fullPath: '/video/$videoUUID/share'
+      preLoaderRoute: typeof VideoVideoUUIDShareRouteImport
+      parentRoute: typeof VideoVideoUUIDRoute
+    }
     '/video/$videoUUID/edit': {
       id: '/video/$videoUUID/edit'
       path: '/edit'
@@ -136,10 +155,12 @@ declare module '@tanstack/react-router' {
 
 interface VideoVideoUUIDRouteChildren {
   VideoVideoUUIDEditRoute: typeof VideoVideoUUIDEditRoute
+  VideoVideoUUIDShareRoute: typeof VideoVideoUUIDShareRoute
 }
 
 const VideoVideoUUIDRouteChildren: VideoVideoUUIDRouteChildren = {
   VideoVideoUUIDEditRoute: VideoVideoUUIDEditRoute,
+  VideoVideoUUIDShareRoute: VideoVideoUUIDShareRoute,
 }
 
 const VideoVideoUUIDRouteWithChildren = VideoVideoUUIDRoute._addFileChildren(

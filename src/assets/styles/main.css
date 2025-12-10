@@ -81,3 +81,55 @@
 .flash {
   animation: flash 1.2s ease-out;
 }
+
+@theme {
+  --animate-showMessageMain: showMessageMain 3s ease-in-out;
+
+  @keyframes showMessageMain {
+    0% {
+      opacity: 1;
+    }
+    12.5% {
+      opacity: 0;
+    }
+    87.5% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  --animate-showMessageSecondary: showMessageSecondary 3s ease-in-out;
+
+  @keyframes showMessageSecondary {
+    0% {
+      opacity: 0;
+    }
+    7.5% {
+      opacity: 0;
+    }
+    25% {
+      opacity: 1;
+    }
+    75% {
+      opacity: 1;
+    }
+    92.5% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}
+
+.showMessage {
+  span:first-child {
+    animation: showMessageMain 4s ease-out;
+  }
+
+  span:last-child {
+    animation: showMessageSecondary 4s ease-out;
+  }
+}

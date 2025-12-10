@@ -61,3 +61,83 @@ export const LongModal: Story = {
     ),
   },
 }
+
+export const NoButtons: Story = {
+  args: {
+    title: 'Edit Video',
+    showButtons: false,
+    children: (
+      <>
+        <Input label="Video Title" name="videotitle" />
+        <Input label="Video Title (With Value)" name="videotitlewithvalue" value="My Video" />
+        <Input label="Video Title (With Error)" name="videotitlewitherror" error="can't be empty" />
+        <div className="relative flex w-full items-center justify-between pb-2 has-disabled:opacity-50">
+          <span className="text-xl font-medium">Delete Video</span>
+          <Button variant="wire-danger" size="medium">
+            Delete Video
+          </Button>
+        </div>
+      </>
+    ),
+  },
+}
+
+export const NoCloseButton: Story = {
+  args: {
+    title: 'Edit Video',
+    showCloseButton: false,
+    children: (
+      <>
+        <Input label="Video Title" name="videotitle" />
+        <Input label="Video Title (With Value)" name="videotitlewithvalue" value="My Video" />
+        <Input label="Video Title (With Error)" name="videotitlewitherror" error="can't be empty" />
+        <div className="relative flex w-full items-center justify-between pb-2 has-disabled:opacity-50">
+          <span className="text-xl font-medium">Delete Video</span>
+          <Button variant="wire-danger" size="medium">
+            Delete Video
+          </Button>
+        </div>
+      </>
+    ),
+  },
+}
+
+export const NoSubmitButton: Story = {
+  args: {
+    title: 'Edit Video',
+    showSubmitButton: false,
+    children: (
+      <>
+        <Input label="Video Title" name="videotitle" />
+        <Input label="Video Title (With Value)" name="videotitlewithvalue" value="My Video" />
+        <Input label="Video Title (With Error)" name="videotitlewitherror" error="can't be empty" />
+        <div className="relative flex w-full items-center justify-between pb-2 has-disabled:opacity-50">
+          <span className="text-xl font-medium">Delete Video</span>
+          <Button variant="wire-danger" size="medium">
+            Delete Video
+          </Button>
+        </div>
+      </>
+    ),
+  },
+}
+
+export const CustomCloseButton: Story = {
+  args: {
+    title: 'Edit Video',
+    closeButtonText: 'Hide modal',
+    children: (
+      <>
+        <Input label="Video Title" name="videotitle" />
+        <Input label="Video Title (With Value)" name="videotitlewithvalue" value="My Video" />
+        <Input label="Video Title (With Error)" name="videotitlewitherror" error="can't be empty" />
+        <div className="relative flex w-full items-center justify-between pb-2 has-disabled:opacity-50">
+          <span className="text-xl font-medium">Delete Video</span>
+          <Button variant="wire-danger" size="medium">
+            Delete Video
+          </Button>
+        </div>
+      </>
+    ),
+  },
+}
