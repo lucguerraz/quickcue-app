@@ -40,7 +40,7 @@ export const Default: Story = {
             },
           },
           setStack: (value: any) => {
-            return
+            return value
           },
         },
       },
