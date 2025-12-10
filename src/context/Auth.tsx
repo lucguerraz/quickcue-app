@@ -7,7 +7,7 @@ import { deleteSession } from '@/api/deleteSession'
 
 export interface User {
   uuid: string
-  name: string | null
+  name: string
   email_address: string
   picture: string | null
 }
