@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { useSearch } from '@tanstack/react-router'
+import { useNavigate, useSearch } from '@tanstack/react-router'
 
 import { useAuth } from '@/context/Auth'
 import { Modal } from '@/components/Core/Modal'
@@ -10,6 +10,7 @@ import { Button } from '@/components/Core/Button'
 import { AlertCircle } from 'react-feather'
 
 import { updateUser, type UpdateUserSuccess, type UpdateUserError } from '@/api/updateUser'
+import { deleteUser, type DeleteUserError } from '@/api/deleteUser'
 
 export interface AccountSettingsModalProps {
   className?: string
@@ -17,12 +18,14 @@ export interface AccountSettingsModalProps {
 
 export const AccountSettingsModal: React.FC<AccountSettingsModalProps> = ({ className = '' }) => {
   const search = useSearch({ strict: false }) as { [key: string]: string }
+  const navigate = useNavigate()
 
-  const { isAuthenticated, user, updateUser: updateUserState } = useAuth()
+  const { isAuthenticated, user, updateUser: updateUserState, logout } = useAuth()
 
   const [formError, setFormError] = useState('')
   const [inputEmailError, setInputEmailError] = useState('')
   const [inputNameError, setInputNameError] = useState('')
+  const [deleteError, setDeleteError] = useState('')
 
   if (!search.modal || search.modal !== 'account-settings' || !isAuthenticated()) {
     return
@@ -88,6 +91,28 @@ export const AccountSettingsModal: React.FC<AccountSettingsModalProps> = ({ clas
     setInputEmailError('')
     setInputNameError('')
     setFormError('')
+    setDeleteError('')
+  }
+
+  const handleDelete = async () => {
+    if (window.confirm("Are you sure you want to delete your account and all it's data?")) {
+      const api = await deleteUser()
+
+      if (api.success) {
+        localStorage.removeItem('session-uuid')
+        logout()
+        navigate({ to: '/' })
+        return
+      }
+
+      if (!api.success) {
+        if ((api as DeleteUserError).message && (api as DeleteUserError).message.length > 0) {
+          setDeleteError((api as DeleteUserError).message)
+        } else {
+          setDeleteError('')
+        }
+      }
+    }
   }
 
   return (
@@ -100,11 +125,19 @@ export const AccountSettingsModal: React.FC<AccountSettingsModalProps> = ({ clas
         defaultValue={user?.email_address}
         error={inputEmailError}
       />
-      <div className="relative flex w-full items-center justify-between pb-2 has-disabled:opacity-50">
-        <span className="text-xl font-medium">Delete Account</span>
-        <Button variant="wire-danger" size="medium">
-          Delete Account
-        </Button>
+      <div>
+        <div className="relative flex w-full items-center justify-between pb-2 has-disabled:opacity-50">
+          <span className="text-xl font-medium">Delete Account</span>
+          <Button variant="wire-danger" size="medium" onClick={handleDelete}>
+            Delete Account
+          </Button>
+        </div>
+        {deleteError && (
+          <p className="flex items-center gap-1 text-xs text-surface-danger">
+            <AlertCircle width="1em" height="1em" />
+            <span>{deleteError}</span>
+          </p>
+        )}
       </div>
       {formError && (
         <p className="flex items-center gap-1 text-xs text-surface-danger">
