@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { fn } from 'storybook/internal/test'
 
 import { VideoUpload } from './VideoUpload'
 
@@ -9,7 +10,9 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  args: {},
+  args: {
+    setUploadingVideo: fn(),
+  },
 } satisfies Meta<typeof VideoUpload>
 
 export default meta

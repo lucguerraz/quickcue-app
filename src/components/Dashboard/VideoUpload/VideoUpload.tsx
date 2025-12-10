@@ -5,7 +5,6 @@ import { useApp } from '@/context/App'
 import { createVideo } from '@/api/createVideo'
 
 export interface VideoUploadProps {
-  uploadingVideo: any
   setUploadingVideo: (video: any) => void
   className?: string
 }
