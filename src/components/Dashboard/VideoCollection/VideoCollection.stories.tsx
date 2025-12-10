@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { fn } from 'storybook/internal/test'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { http, HttpResponse, delay } from 'msw'
 import VideoData from './VideoCollectionStoryData.json'
@@ -28,7 +29,10 @@ const meta = {
     layout: 'fullscreen',
   },
   tags: ['autodocs'],
-  args: {},
+  args: {
+    uploadingVideo: null,
+    setUploadingVideo: fn(),
+  },
 } satisfies Meta<typeof VideoCollection>
 
 export default meta

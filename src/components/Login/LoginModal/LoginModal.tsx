@@ -18,7 +18,7 @@ export interface LoginModalProps {
 }
 
 export const LoginModal: React.FC<LoginModalProps> = ({ className = '' }) => {
-  const search = useSearch({ strict: false })
+  const search = useSearch({ strict: false }) as { [key: string]: string }
 
   const [loginStep, setLoginStep] = useState('email')
   const { isAuthenticated, loginEmail, loginCode } = useAuth()

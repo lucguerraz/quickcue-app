@@ -45,7 +45,7 @@ function App() {
     <section className="@container">
       <div className="mx-6 flex items-center justify-between pt-6">
         <h1 className="text-4xl leading-none font-medium text-text-primary">Videos</h1>
-        <VideoUpload uploadingVideo={uploadingVideo} setUploadingVideo={setUploadingVideo} />
+        <VideoUpload setUploadingVideo={setUploadingVideo} />
       </div>
       <VideoCollection uploadingVideo={uploadingVideo} setUploadingVideo={setUploadingVideo} />
     </section>
