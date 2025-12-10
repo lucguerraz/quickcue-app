@@ -443,3 +443,43 @@ export const NotLoggedIn: Story = {
     minWidth: '400px',
   },
 }
+
+export const NoComments: Story = {
+  args: {
+    videoUUID: '324bced6-4e7f-4e96-b74b-f0bbdd595868',
+    videoTimecode: 20,
+    videoLength: 60,
+    comments: [],
+  },
+  decorators: [
+    withReactContext({
+      context: AuthContext,
+      contextValue: { isAuthenticated: () => true },
+    }),
+  ],
+  parameters: {
+    msw: {
+      handlers: [
+        http.post(`${import.meta.env.VITE_API_ENDPOINT}/videos/:videouuid/comments`, async ({ request }) => {
+          const commentData = (await request.json()) as any
+          await delay(300)
+          return HttpResponse.json({
+            uuid: crypto.randomUUID(),
+            message: commentData?.message || '',
+            timestamp_start: commentData?.timestamp_start || 0,
+            timestamp_end: commentData?.timestamp_end || 0,
+            updated_at: new Date(Date.now()).toISOString(),
+            user: {
+              uuid: '8f8ca331-fbe3-4542-bf68-f11df328e58d',
+              name: 'User1',
+              picture: null,
+            },
+          })
+        }),
+      ],
+    },
+  },
+  globals: {
+    minWidth: '400px',
+  },
+}

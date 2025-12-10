@@ -6,6 +6,8 @@ import { LinkButton } from '@/components/Core/LinkButton'
 import { Comment } from '@/components/Video/Comments/Comment'
 import { type Comment as CommentType } from '@/api/getComments'
 import { createComment, type CreateCommentSuccess, type CreateCommentError } from '@/api/createComment'
+import { Button } from '@/components/Core/Button'
+import { AlertCircle } from 'react-feather'
 
 export interface CommentSectionProps {
   videoUUID: string
@@ -122,20 +124,35 @@ export const CommentSection: React.FC<CommentSectionProps> = ({
           </LinkButton>
         </div>
       )}
-      {[...optimisticComments, ...comments]
-        .sort((a, b) => a.timestamp_start - b.timestamp_start)
-        .map(({ uuid, message, updated_at, user }) => (
-          <Comment
-            key={uuid}
-            uuid={uuid}
-            useruuid={user.uuid}
-            username={user.name}
-            userpic={user.picture}
-            lastModified={updated_at}
-          >
-            {message}
-          </Comment>
-        ))}
+      {[...optimisticComments, ...comments].length > 0 ? (
+        [...optimisticComments, ...comments]
+          .sort((a, b) => a.timestamp_start - b.timestamp_start)
+          .map(({ uuid, message, updated_at, user }) => (
+            <Comment
+              key={uuid}
+              uuid={uuid}
+              useruuid={user.uuid}
+              username={user.name}
+              userpic={user.picture}
+              lastModified={updated_at}
+            >
+              {message}
+            </Comment>
+          ))
+      ) : (
+        <div className="flex flex-col items-center justify-center gap-3 p-8">
+          <p className="flex items-center gap-1 text-xs leading-none text-text-secondary-contrast">
+            <AlertCircle height="1em" width="1em" />
+            No comments to show
+          </p>
+          <h2 className="text-text-primar text-center text-base leading-tight font-medium">
+            There aren't any comments yet
+          </h2>
+          <Button variant="secondary" size="small" onClick={() => document.getElementById('message')?.focus()}>
+            Add a coment
+          </Button>
+        </div>
+      )}
     </div>
   )
 }
