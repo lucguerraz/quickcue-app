@@ -125,7 +125,9 @@ function VideoPage() {
               <LinkButton to="/video/$videoUUID/edit" params={{ videoUUID }} variant="secondary" icon="edit">
                 Edit
               </LinkButton>
-              <Button icon="share">Share</Button>
+              <LinkButton to="/video/$videoUUID/share" params={{ videoUUID }} icon="share">
+                Share
+              </LinkButton>
             </div>
           ) : null}
         </div>
