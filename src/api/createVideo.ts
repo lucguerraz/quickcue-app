@@ -14,7 +14,7 @@ export interface CreateVideoErrorErrors {
 }
 
 export interface uploadPreview {
-  uuid: string | null
+  uuid: string
   name: string
   status: 'none' | 'uploading' | 'processing' | 'done' | 'error'
   poster?: string
@@ -26,7 +26,7 @@ interface PostSSEMessageEvent extends MessageEvent {
 }
 
 interface ProgressMessage {
-  uuid: string | null
+  uuid: string
   name: string
   status: 'none' | 'uploading' | 'processing' | 'done' | 'error'
   progress?: number
@@ -144,7 +144,7 @@ export function PostSSE(
 
         eventTarget.dispatchEvent(
           new MessageEvent('message', {
-            data: { uuid: null, status: 'uploading', progress: percentComplete },
+            data: { uuid: 'UUID_NOT_SET_YET', status: 'uploading', progress: percentComplete },
           }),
         )
       }
