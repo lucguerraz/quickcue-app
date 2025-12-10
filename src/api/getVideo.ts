@@ -10,7 +10,7 @@ export interface Video {
   updated_at: string
   poster: string
   video_url: string
-  user: { uuid: string; name: string | null }
+  user: { uuid: string; name: string }
 }
 
 export interface GetVideoSuccess {

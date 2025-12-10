@@ -3,7 +3,7 @@ export interface GetUserSuccess {
   message: string
   userData: {
     uuid: string
-    name: string | null
+    name: string
     email_address: string
     picture: string | null
   }
