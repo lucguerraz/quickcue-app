@@ -83,7 +83,7 @@ export const User: React.FC<UserProps> = ({ className = '' }) => {
             className="pointer-events-none h-full w-full overflow-hidden rounded-md bg-primary-300 object-cover"
             dangerouslySetInnerHTML={{
               __html: createAvatar(notionistsNeutral, {
-                seed: user?.email_address,
+                seed: user?.uuid,
                 flip: true,
                 backgroundColor: ['transparent'],
               }).toString(),
