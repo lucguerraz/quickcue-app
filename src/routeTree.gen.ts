@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as AccountSettingsRouteImport } from './routes/account-settings'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as VideoVideoUUIDRouteImport } from './routes/video/$videoUUID'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountSettingsRoute = AccountSettingsRouteImport.update({
+  id: '/account-settings',
+  path: '/account-settings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -31,30 +37,34 @@ const VideoVideoUUIDRoute = VideoVideoUUIDRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/account-settings': typeof AccountSettingsRoute
   '/login': typeof LoginRoute
   '/video/$videoUUID': typeof VideoVideoUUIDRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/account-settings': typeof AccountSettingsRoute
   '/login': typeof LoginRoute
   '/video/$videoUUID': typeof VideoVideoUUIDRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/account-settings': typeof AccountSettingsRoute
   '/login': typeof LoginRoute
   '/video/$videoUUID': typeof VideoVideoUUIDRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/video/$videoUUID'
+  fullPaths: '/' | '/account-settings' | '/login' | '/video/$videoUUID'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/video/$videoUUID'
-  id: '__root__' | '/' | '/login' | '/video/$videoUUID'
+  to: '/' | '/account-settings' | '/login' | '/video/$videoUUID'
+  id: '__root__' | '/' | '/account-settings' | '/login' | '/video/$videoUUID'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AccountSettingsRoute: typeof AccountSettingsRoute
   LoginRoute: typeof LoginRoute
   VideoVideoUUIDRoute: typeof VideoVideoUUIDRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account-settings': {
+      id: '/account-settings'
+      path: '/account-settings'
+      fullPath: '/account-settings'
+      preLoaderRoute: typeof AccountSettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AccountSettingsRoute: AccountSettingsRoute,
   LoginRoute: LoginRoute,
   VideoVideoUUIDRoute: VideoVideoUUIDRoute,
 }
