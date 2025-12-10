@@ -18,6 +18,7 @@ export interface AuthState {
   logout: () => Promise<boolean>
   loginEmail: (email_address: string) => Promise<CreateSessionResponse>
   loginCode: (sessionUUID: string, code: string) => Promise<UpdateSessionResponse>
+  updateUser: (name: string, email_address: string) => boolean
 }
 
 export const AuthContext = createContext<AuthState | undefined>(undefined)
@@ -98,7 +99,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  return <AuthContext value={{ isAuthenticated, user, logout, loginEmail, loginCode }}>{children}</AuthContext>
+  const updateUser = (name: string, email_address: string): boolean => {
+    if (user === null) return false
+    setUser({ uuid: user.uuid, name, email_address, picture: user.picture })
+    return true
+  }
+
+  return (
+    <AuthContext value={{ isAuthenticated, user, logout, loginEmail, loginCode, updateUser }}>{children}</AuthContext>
+  )
 }
 
 export function useAuth() {
