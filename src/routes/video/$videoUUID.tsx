@@ -6,6 +6,7 @@ import { useApp } from '@/context/App'
 import { useQuery } from '@tanstack/react-query'
 import { AlertCircle } from 'react-feather'
 import { Button } from '@/components/Core/Button'
+import { LinkButton } from '@/components/Core/LinkButton'
 import { VideoPlayer } from '@/components/Video/VideoPlayer'
 import { CommentSection } from '@/components/Video/Comments/CommentSection'
 import { getVideo, type GetVideoSuccess } from '@/api/getVideo'
@@ -121,9 +122,9 @@ function VideoPage() {
           <h1 className="text-4xl leading-none font-medium text-text-primary">{videoData.name}</h1>
           {isAuthenticated() && user?.uuid === videoData.user.uuid ? (
             <div className="flex gap-2">
-              <Button variant="secondary" icon="edit">
+              <LinkButton to="/video/$videoUUID/edit" params={{ videoUUID }} variant="secondary" icon="edit">
                 Edit
-              </Button>
+              </LinkButton>
               <Button icon="share">Share</Button>
             </div>
           ) : null}
