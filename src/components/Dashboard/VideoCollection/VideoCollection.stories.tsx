@@ -75,6 +75,76 @@ export const Loading: Story = {
   },
 }
 
+export const Uploading: Story = {
+  args: {
+    uploadingVideo: {
+      uuid: '7502e06b-c7e0-4955-9a87-7207913eb056',
+      name: 'mynewvideo.mp4',
+      progress: 24,
+      status: 'processing',
+      poster: undefined,
+    },
+  },
+  loaders: [
+    () => {
+      queryClient.clear()
+    },
+  ],
+  parameters: {
+    msw: {
+      handlers: [
+        http.get(`${import.meta.env.VITE_API_ENDPOINT}/videos`, () => {
+          return HttpResponse.json(VideoData)
+        }),
+      ],
+    },
+  },
+}
+
+export const Empty: Story = {
+  args: {},
+  loaders: [
+    () => {
+      queryClient.clear()
+    },
+  ],
+  parameters: {
+    msw: {
+      handlers: [
+        http.get(`${import.meta.env.VITE_API_ENDPOINT}/videos`, () => {
+          return HttpResponse.json([])
+        }),
+      ],
+    },
+  },
+}
+
+export const EmptyAndUploading: Story = {
+  args: {
+    uploadingVideo: {
+      uuid: '7502e06b-c7e0-4955-9a87-7207913eb056',
+      name: 'mynewvideo.mp4',
+      progress: 24,
+      status: 'processing',
+      poster: undefined,
+    },
+  },
+  loaders: [
+    () => {
+      queryClient.clear()
+    },
+  ],
+  parameters: {
+    msw: {
+      handlers: [
+        http.get(`${import.meta.env.VITE_API_ENDPOINT}/videos`, () => {
+          return HttpResponse.json([])
+        }),
+      ],
+    },
+  },
+}
+
 export const Error: Story = {
   args: {},
   loaders: [

@@ -67,18 +67,33 @@ export const VideoCollection: React.FC<VideoCollectionProps> = ({
           progress={uploadingVideo.progress}
         />
       )}
-      {isPending
-        ? [...Array(8).keys()].map((key) => <VideoTeaserSkeleton key={key} />)
-        : (data as Video[]).map((video) => (
-            <VideoTeaser
-              key={video.uuid}
-              uuid={video.uuid}
-              poster={video.poster}
-              title={video.name}
-              commentCount={video.comment_count}
-              lastModified={video.updated_at}
-            />
-          ))}
+      {isPending ? (
+        [...Array(8).keys()].map((key) => <VideoTeaserSkeleton key={key} />)
+      ) : data.length > 0 ? (
+        (data as Video[]).map((video) => (
+          <VideoTeaser
+            key={video.uuid}
+            uuid={video.uuid}
+            poster={video.poster}
+            title={video.name}
+            commentCount={video.comment_count}
+            lastModified={video.updated_at}
+          />
+        ))
+      ) : uploadingVideo === null ? (
+        <div className="col-span-4 flex min-h-[80vh] flex-col items-center justify-center gap-3">
+          <p className="flex items-center gap-1 text-sm leading-none text-text-secondary-contrast">
+            <AlertCircle height="1em" width="1em" />
+            No Videos to show
+          </p>
+          <h2 className="text-text-primar text-center text-3xl leading-tight font-medium">
+            You don't have any vidoes yet
+          </h2>
+          <Button variant="secondary" onClick={() => document.getElementById('videoUpload')?.click()}>
+            Upload video
+          </Button>
+        </div>
+      ) : null}
     </div>
   )
 }
