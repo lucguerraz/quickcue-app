@@ -89,6 +89,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ className = '' }) => {
 
       if (loginCodeApi.success) {
         close()
+        setLoginStep('email')
         return
       }
 
@@ -122,7 +123,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ className = '' }) => {
       <Modal title="Login to continue" onSave={handleSave} closePath="." showButtons={false} className={className}>
         {loginStep === 'email' && (
           <>
-            <Input label="Email Adsress" name="email_address" type="email" error={inputEmailError} />
+            <Input label="Email Address" name="email_address" type="email" error={inputEmailError} />
             <div className="flex w-full flex-col items-start gap-2">
               <Button type="submit">Continue</Button>
               {formError && (
@@ -149,7 +150,6 @@ export const LoginModal: React.FC<LoginModalProps> = ({ className = '' }) => {
           </>
         )}
       </Modal>
-      <pre>{JSON.stringify(search, null, '')}</pre>
     </>
   )
 }
