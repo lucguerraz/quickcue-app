@@ -90,7 +90,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
         <progress
           id="videoProgress"
           max="100"
-          value={(100 / duration) * (seekTimecode !== false ? seekTimecode : timecode)}
+          value={duration === 0 ? 0 : (100 / duration) * (seekTimecode !== false ? seekTimecode : timecode)}
           className="absolute top-0 h-2 w-full bg-surface-brand [&::-moz-progress-bar]:bg-surface-brand-contrast [&::-webkit-progress-bar]:bg-surface-brand [&::-webkit-progress-value]:bg-surface-brand-contrast"
         >
           Progress
@@ -100,7 +100,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
           id="seek"
           min="0"
           max="100"
-          value={(100 / duration) * (seekTimecode !== false ? seekTimecode : timecode)}
+          value={duration === 0 ? 0 : (100 / duration) * (seekTimecode !== false ? seekTimecode : timecode)}
           step="0.001"
           aria-label="Seek slider"
           aria-valuemin={0}

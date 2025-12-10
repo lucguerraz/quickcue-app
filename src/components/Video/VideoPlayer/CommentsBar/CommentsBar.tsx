@@ -92,6 +92,8 @@ export const CommentsBar: React.FC<CommentsBarProps> = ({ timecode, duration, co
       {commentLayers.map((layer) => (
         <div key={btoa(JSON.stringify(layer)).slice(20, 40)} className="relative h-2 w-full">
           {layer.map(({ uuid, timestamp_start, timestamp_end }) => {
+            if (duration === 0) return null
+
             const comment_offset = (100 / duration) * timestamp_start
             const comment_length = (100 / duration) * timestamp_end - comment_offset
 
