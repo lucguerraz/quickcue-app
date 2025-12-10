@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 
 import { useQuery } from '@tanstack/react-query'
+import { useApp } from '@/context/App'
 import { getVideo, type GetVideoSuccess } from '@/api/getVideo'
 import { Modal } from '@/components/Core/Modal'
 import { Input } from '@/components/Core/Input'
@@ -17,6 +18,9 @@ export const Route = createFileRoute('/video/$videoUUID/edit')({
 function RouteComponent() {
   const { videoUUID } = Route.useParams()
   const navigate = useNavigate()
+  const {
+    toast: { stack, setStack },
+  } = useApp()
 
   const { isPending, data, isError, refetch } = useQuery({
     queryKey: ['video', videoUUID],
@@ -85,6 +89,16 @@ function RouteComponent() {
 
       if (api.success) {
         navigate({ to: '/' })
+        const uuid = crypto.randomUUID()
+        setStack({
+          ...stack,
+          [uuid]: {
+            id: uuid,
+            status: 'success',
+            message: 'Video was deleted',
+            trigger: '',
+          },
+        })
         return
       }
 
