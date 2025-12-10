@@ -89,6 +89,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ className = '' }) => {
 
       if (loginCodeApi.success) {
         close()
+        setLoginStep('email')
         return
       }
 
