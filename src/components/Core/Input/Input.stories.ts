@@ -20,7 +20,7 @@ export const Text: Story = {
   args: {
     label: 'Username',
     name: 'username',
-    value: 'myusername',
+    defaultValue: 'myusername',
   },
   globals: {
     maxWidth: '600px',
@@ -33,7 +33,7 @@ export const Email: Story = {
     label: 'Email',
     name: 'email',
     type: 'email',
-    value: 'spongebob@example.com',
+    defaultValue: 'spongebob@example.com',
   },
   globals: {
     maxWidth: '600px',
@@ -45,7 +45,7 @@ export const WithError: Story = {
   args: {
     label: 'Username',
     name: 'username',
-    value: 'my-user-name',
+    defaultValue: 'my-user-name',
     error: 'may not contain dashes',
   },
   globals: {
@@ -58,7 +58,7 @@ export const Disabled: Story = {
   args: {
     label: 'Username',
     name: 'username',
-    value: 'myusername',
+    defaultValue: 'myusername',
     disabled: true,
   },
   globals: {
