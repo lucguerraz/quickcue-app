@@ -9,6 +9,8 @@ export interface LinkButtonProps {
   size?: 'small' | 'medium' | 'large'
   children: React.ReactNode
   to: string
+  search?: any
+  mask?: any
   disabled?: boolean
   className?: string
   icon?: 'new' | 'edit' | 'share' | 'trash' | 'back' | 'none'
@@ -19,6 +21,8 @@ export const LinkButton: React.FC<LinkButtonProps> = ({
   size = 'large',
   children,
   to,
+  search,
+  mask,
   disabled = false,
   className = '',
   icon = 'none',
@@ -52,6 +56,8 @@ export const LinkButton: React.FC<LinkButtonProps> = ({
   return (
     <Link
       to={to}
+      search={search}
+      mask={mask}
       tabIndex={0}
       disabled={disabled}
       className={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
