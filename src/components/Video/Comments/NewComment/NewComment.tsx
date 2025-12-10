@@ -87,7 +87,7 @@ export const NewComment: React.FC<NewCommentProps> = ({
           <div className="flex transform-gpu rounded-md bg-surface-secondary-contrast">
             {startTimestamp !== false && (
               <div
-                className={`group flex rounded-l-md focus-within:[&+div>span]:bg-transparent ${errors?.timestamp_start ? 'bg-surface-danger/10' : ''}`}
+                className={`group flex rounded-l-md has-focus-visible:[&+div>span]:bg-transparent ${errors?.timestamp_start ? 'bg-surface-danger/10' : ''}`}
               >
                 <TimecodeInput
                   name="startTimestamp"
@@ -104,9 +104,9 @@ export const NewComment: React.FC<NewCommentProps> = ({
             )}
             {endTimestamp !== false && (
               <div
-                className={`group flex focus-within:[&+div>span]:bg-transparent ${errors?.timestamp_end ? 'bg-surface-danger/10' : ''}`}
+                className={`group flex has-focus-visible:[&+div>span]:bg-transparent ${errors?.timestamp_end ? 'bg-surface-danger/10' : ''}`}
               >
-                <span className="w-[0.5px] bg-text-secondary-contrast group-focus-within:bg-transparent"></span>
+                <span className="w-[0.5px] bg-text-secondary-contrast group-has-focus-visible:bg-transparent"></span>
                 <TimecodeInput
                   name="endTimestamp"
                   onChange={setEndTimestamp}
@@ -121,8 +121,8 @@ export const NewComment: React.FC<NewCommentProps> = ({
               </div>
             )}
             {startTimestamp !== false && endTimestamp === false && (
-              <div className="group flex focus-within:[&+div>span]:bg-transparent">
-                <span className="w-[0.5px] bg-text-secondary-contrast group-focus-within:bg-transparent"></span>
+              <div className="group flex has-focus-visible:[&+div>span]:bg-transparent">
+                <span className="w-[0.5px] bg-text-secondary-contrast group-has-focus-visible:bg-transparent"></span>
                 <button
                   type="button"
                   onClick={() => {
@@ -137,7 +137,7 @@ export const NewComment: React.FC<NewCommentProps> = ({
             )}
             {startTimestamp !== false && (
               <div className="group flex">
-                <span className="w-[0.5px] bg-text-secondary-contrast group-focus-within:bg-transparent"></span>
+                <span className="w-[0.5px] bg-text-secondary-contrast group-has-focus-visible:bg-transparent"></span>
                 <button
                   type="button"
                   onClick={() => {
