@@ -17,6 +17,7 @@ export interface GetCommentsError {
   success: boolean
   message: string
   errors: GetCommentsErrorErrors
+  httpcode: number
 }
 
 export interface GetCommentsErrorErrors {
@@ -45,6 +46,7 @@ export const getComments = async (videoUUID: string): Promise<GetCommentsRespons
         success: false,
         message: errorData.error,
         errors: errorData?.errors || {},
+        httpcode: response.status,
       }
     }
   } catch (error) {
@@ -53,6 +55,7 @@ export const getComments = async (videoUUID: string): Promise<GetCommentsRespons
       success: false,
       message: 'Network error',
       errors: {},
+      httpcode: 500,
     }
   }
 }

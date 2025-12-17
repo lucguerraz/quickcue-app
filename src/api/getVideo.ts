@@ -23,6 +23,7 @@ export interface GetVideoError {
   success: boolean
   message: string
   errors: GetVideoErrorErrors
+  httpcode: number
 }
 
 export interface GetVideoErrorErrors {
@@ -51,6 +52,7 @@ export const getVideo = async (videoUUID: string): Promise<GetVideoResponse> => 
         success: false,
         message: errorData.error,
         errors: errorData?.errors || {},
+        httpcode: response.status,
       }
     }
   } catch (error) {
@@ -59,6 +61,7 @@ export const getVideo = async (videoUUID: string): Promise<GetVideoResponse> => 
       success: false,
       message: 'Network error',
       errors: {},
+      httpcode: 500,
     }
   }
 }
