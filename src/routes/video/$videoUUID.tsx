@@ -95,13 +95,13 @@ function VideoPage() {
     return (
       <section>
         <div className="mx-6 flex items-center justify-between pt-6">
-          <div className="h-9 w-2/5 min-w-120 rounded bg-gray-200 duration-500 not-motion-reduce:animate-pulse"></div>
+          <div className="h-9 w-2/5 rounded bg-gray-200 duration-500 not-motion-reduce:animate-pulse md:min-w-120"></div>
           <div className="flex gap-2">
             <div className="h-10 w-28 rounded bg-gray-200 duration-500 not-motion-reduce:animate-pulse"></div>
             <div className="h-10 w-28 rounded bg-gray-200 duration-500 not-motion-reduce:animate-pulse"></div>
           </div>
         </div>
-        <div className="m-6 grid grid-cols-[3fr_1fr] gap-3">
+        <div className="m-6 grid grid-cols-1 gap-3 lg:grid-cols-[3fr_1fr]">
           <div className="aspect-video w-full rounded-lg bg-gray-200 duration-500 not-motion-reduce:animate-pulse"></div>
           <div className="flex flex-col gap-3">
             <div className="h-40 w-full rounded-md bg-gray-200 duration-500 not-motion-reduce:animate-pulse"></div>
@@ -118,8 +118,8 @@ function VideoPage() {
   return (
     <>
       <section>
-        <div className="mx-6 flex items-center justify-between pt-6">
-          <h1 className="text-4xl leading-none font-medium text-text-primary">{videoData.name}</h1>
+        <div className="mx-6 flex flex-row flex-wrap items-center justify-between gap-3 pt-6">
+          <h1 className="text-4xl leading-none font-medium break-all text-text-primary">{videoData.name}</h1>
           {isAuthenticated() && user?.uuid === videoData.user.uuid ? (
             <div className="flex gap-2">
               <LinkButton to="/video/$videoUUID/edit" params={{ videoUUID }} variant="secondary" icon="edit">
@@ -131,7 +131,7 @@ function VideoPage() {
             </div>
           ) : null}
         </div>
-        <div className="m-6 grid grid-cols-[3fr_1fr] gap-3">
+        <div className="m-6 grid grid-cols-1 gap-3 lg:grid-cols-[3fr_1fr]">
           <div>
             <VideoPlayer
               videoUrl={videoData.video_url}
