@@ -63,7 +63,7 @@ export const Modal: React.FC<ModalProps> = ({
           onSubmit={handleSubmit}
           className="flex flex-col gap-6 after:h-px after:w-full after:bg-surface-secondary-contrast"
         >
-          <header className="sticky flex items-center justify-between">
+          <header className="sticky flex flex-row flex-wrap items-center justify-between gap-2">
             <h2 className="text-2xl font-medium">{title}</h2>
             {showButtons && (
               <div className="flex gap-3">
