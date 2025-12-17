@@ -94,8 +94,8 @@ function VideoPage() {
   if (videoIsPending || commentsIsPending) {
     return (
       <section>
-        <div className="mx-6 flex items-center justify-between pt-6">
-          <div className="h-9 w-2/5 rounded bg-gray-200 duration-500 not-motion-reduce:animate-pulse md:min-w-120"></div>
+        <div className="mx-6 flex flex-col items-start justify-between gap-3 pt-6 md:flex-row md:items-center">
+          <div className="h-9 w-full rounded bg-gray-200 duration-500 not-motion-reduce:animate-pulse md:w-2/5 md:min-w-120"></div>
           <div className="flex gap-2">
             <div className="h-10 w-28 rounded bg-gray-200 duration-500 not-motion-reduce:animate-pulse"></div>
             <div className="h-10 w-28 rounded bg-gray-200 duration-500 not-motion-reduce:animate-pulse"></div>
