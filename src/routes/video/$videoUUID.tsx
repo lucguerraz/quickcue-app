@@ -9,8 +9,8 @@ import { Button } from '@/components/Core/Button'
 import { LinkButton } from '@/components/Core/LinkButton'
 import { VideoPlayer } from '@/components/Video/VideoPlayer'
 import { CommentSection } from '@/components/Video/Comments/CommentSection'
-import { getVideo, type GetVideoSuccess } from '@/api/getVideo'
-import { getComments, type GetCommentsSuccess } from '@/api/getComments'
+import { getVideo, type GetVideoSuccess, type GetVideoError } from '@/api/getVideo'
+import { getComments, type GetCommentsSuccess, type GetCommentsError } from '@/api/getComments'
 
 export const Route = createFileRoute('/video/$videoUUID')({
   component: VideoPage,
@@ -46,7 +46,12 @@ function VideoPage() {
         return (api as GetVideoSuccess).videoData
       }
 
-      throw new Error(api.message)
+      throw new Error(api.message, { cause: (api as GetVideoError).httpcode })
+    },
+    retry: (count, error) => {
+      if (error.cause) return false
+      if (count > 5) return false
+      return true
     },
   })
   const {
@@ -64,7 +69,12 @@ function VideoPage() {
         return (api as GetCommentsSuccess).commentsData
       }
 
-      throw new Error(api.message)
+      throw new Error(api.message, { cause: (api as GetCommentsError).httpcode })
+    },
+    retry: (count, error) => {
+      if (error.cause) return false
+      if (count > 5) return false
+      return true
     },
   })
 
@@ -76,17 +86,23 @@ function VideoPage() {
           {videoError?.message || commentsError?.message}
         </p>
         <h2 className="text-text-primar text-center text-3xl leading-tight font-medium">
-          Sorry, the video couldn't be loaded
+          {videoError?.cause === 404 ? "Sorry, the video couldn't be found" : "Sorry, the video couldn't be loaded"}
         </h2>
-        <Button
-          variant="secondary"
-          onClick={() => {
-            videoRefetch()
-            commentsRefetch()
-          }}
-        >
-          Try Again
-        </Button>
+        {videoError?.cause === 404 ? (
+          <LinkButton variant="secondary" to="/">
+            Return to Dashboard
+          </LinkButton>
+        ) : (
+          <Button
+            variant="secondary"
+            onClick={() => {
+              videoRefetch()
+              commentsRefetch()
+            }}
+          >
+            Try Again
+          </Button>
+        )}
       </div>
     )
   }
