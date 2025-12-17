@@ -32,7 +32,7 @@ export const Button: React.FC<ButtonProps> = ({
     translucent: tw`bg-surface-secondary/20 text-text-primary-inverted not-disabled:hover:bg-surface-secondary/30 focus:ring-text-primary-inverted focus:ring-offset-black`,
     danger: tw`bg-surface-danger text-text-danger not-disabled:hover:bg-surface-danger-contrast not-disabled:hover:text-text-danger-contrast focus:ring-red-500`,
     wire: tw`border border-text-secondary text-text-secondary not-disabled:hover:bg-surface-secondary`,
-    'wire-danger': tw`border border-text-secondary text-text-secondary not-disabled:hover:border-0 not-disabled:hover:bg-surface-danger-contrast not-disabled:hover:text-text-danger-contrast`,
+    'wire-danger': tw`border border-text-secondary text-text-secondary not-disabled:hover:border-surface-danger-contrast not-disabled:hover:bg-surface-danger-contrast not-disabled:hover:text-text-danger-contrast`,
   }
 
   const sizeStyles = {
