@@ -51,6 +51,7 @@ export const createVideo = async (
       formData.append('file', file)
 
       let requestSentTime = Date.now()
+      let previewingUpload = false
       const xs = PostSSE(`${import.meta.env.VITE_API_ENDPOINT}/videos`, {
         method: 'POST',
         body: formData,
@@ -92,6 +93,10 @@ export const createVideo = async (
 
         if (event.data.status === 'uploading') {
           if (requestSentTime + 500 < Date.now() && event.data.progress! < 50) {
+            previewingUpload = true
+          }
+
+          if (previewingUpload) {
             previewUpload({
               uuid: event.data.uuid,
               name: file.name,
