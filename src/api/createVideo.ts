@@ -91,7 +91,7 @@ export const createVideo = async (
         }
 
         if (event.data.status === 'uploading') {
-          if (event.data.progress! > 50 && requestSentTime + 500 < Date.now()) {
+          if (requestSentTime + 500 < Date.now() && event.data.progress! < 50) {
             previewUpload({
               uuid: event.data.uuid,
               name: file.name,
