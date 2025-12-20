@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import { Tooltip } from 'react-tooltip'
 import { AlertCircle, Clock, X as Close } from 'react-feather'
 import { Button } from '@/components/Core/Button'
 import { TimecodeInput } from '@/components/Video/Comments/NewComment/TimecodeInput'
@@ -129,6 +130,9 @@ export const NewComment: React.FC<NewCommentProps> = ({
                     videoEventTarget.dispatchEvent(new CustomEvent('pause'))
                     setEndTimestamp(videoTimecode)
                   }}
+                  data-tooltip-id="new-comment-tooltip"
+                  data-tooltip-content="Add end timestamp"
+                  data-tooltip-place="bottom"
                   className="flex aspect-square h-[calc(1rem*1.25+0.75rem)] appearance-none items-center justify-center rounded-md bg-surface-secondary-contrast text-sm text-text-secondary-contrast outline-0 focus:z-10 focus-visible:ring-1 focus-visible:ring-text-primary/50"
                 >
                   <Clock height="1.1em" width="1.1em" />
@@ -147,6 +151,9 @@ export const NewComment: React.FC<NewCommentProps> = ({
                     }
                     setStartTimestamp(false)
                   }}
+                  data-tooltip-id="new-comment-tooltip"
+                  data-tooltip-content={`Remove ${endTimestamp !== false ? 'end' : 'start'} timestamp`}
+                  data-tooltip-place="bottom"
                   className="flex aspect-square h-[calc(1rem*1.25+0.75rem)] appearance-none items-center justify-center rounded-md bg-surface-secondary-contrast text-sm text-text-secondary-contrast outline-0 focus:z-10 focus-visible:ring-1 focus-visible:ring-text-primary/50"
                 >
                   <Close height="1.1em" width="1.1em" />
@@ -160,11 +167,15 @@ export const NewComment: React.FC<NewCommentProps> = ({
                   videoEventTarget.dispatchEvent(new CustomEvent('pause'))
                   setStartTimestamp(videoTimecode)
                 }}
+                data-tooltip-id="new-comment-tooltip"
+                data-tooltip-content="Add start timestamp"
+                data-tooltip-place="bottom"
                 className="flex aspect-square h-[calc(1rem*1.25+0.75rem)] appearance-none items-center justify-center rounded-md bg-surface-secondary-contrast text-sm text-text-secondary-contrast outline-0 focus:z-10 focus-visible:ring-1 focus-visible:ring-text-primary/50"
               >
                 <Clock height="1.1em" width="1.1em" />
               </button>
             )}
+            <Tooltip id="new-comment-tooltip" />
           </div>
           <Button type="submit" size="small">
             Comment
