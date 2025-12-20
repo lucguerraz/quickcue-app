@@ -155,6 +155,7 @@ function VideoPage() {
               comments={commentsData}
               setVideoLength={setVideoLength}
               setVideoTimecode={setVideoTimecode}
+              className="lg:sticky lg:top-6"
             />
           </div>
           <CommentSection
