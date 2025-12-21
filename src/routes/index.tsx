@@ -39,6 +39,7 @@ function App() {
 
   useEffect(() => {
     setShowDashboardButton(false)
+    document.title = 'QuickCue'
   })
 
   if (!auth.isAuthenticated()) {
