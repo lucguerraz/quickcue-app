@@ -78,6 +78,12 @@ function VideoPage() {
     },
   })
 
+  useEffect(() => {
+    if (videoData?.name) {
+      document.title = videoData.name + ' | QuickCue'
+    }
+  }, [videoIsPending])
+
   if (videoIsError || commentsIsError) {
     return (
       <div className="flex min-h-[80vh] flex-col items-center justify-center gap-3">
