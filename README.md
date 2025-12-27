@@ -8,7 +8,7 @@ Users can then watch the video and add comments including a timestamp or even a 
 
 ## Demo
 
-Explore the demo here: [https://quickcue.guerraz.co](https://quickcue.guerraz.co). To add comments of your own, you can log in using any email address and you'll receive a one-time passcode.
+Explore the demo here: [https://quickcue.guerraz.co](https://quickcue.guerraz.co/video/bac87eb1-9bc0-4157-8f79-0a80c65121cc). To add comments of your own, you can log in using any email address and you'll receive a one-time passcode.
 
 ## Screenshots
 
